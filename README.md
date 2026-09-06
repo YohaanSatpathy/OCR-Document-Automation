@@ -62,7 +62,7 @@ python converter_modified.py --folder "C:/Users/You/Documents/scans"
 **SAMPLE DOCUMENTS**
 
 
-samples/ contains synthetic invoices generated with the help of AI. Company names, addresses, part numbers, prices, and total amounts are all fictional. This repository does not contain any real documents.
+samples/ contains synthetic invoices. Company names, addresses, part numbers, prices and totals are all invented. No real documents are published in this repository.
 
 The sample PDFs are designed to be image-only with no text layer to simulate a real-world document scan as you'd get from a physical scanner. This way the pipeline can be tested on real PDFs that also require OCR to be read.
 
