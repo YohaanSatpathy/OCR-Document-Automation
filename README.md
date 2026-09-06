@@ -1,14 +1,19 @@
 # OCR-Document-Automation
 
 
+
 **WHY**
+
+
 
 A multifunction printer or dedicated scanner emails scanned invoices as attachments and gives them a default name. If manually done, a person would have to find the email, open the document, read the invoice number and order number, then rename the document with the format WOXXXXXXX- INVXXXXXXX and save it in a specific folder. Doing this for one document would take 20 seconds. Doing it for 100 documents would take 33.33 minutes. That's time spent on doing a job that can be very easily automated and for which resources can be allocated towards better directions. 
 
 This script does that job automatically, and the copy it saves is text-searchable rather than a flat image. Originally written to automate document filing at a manufacturing company, this version builds on that and refines it.
 
 
+
 **HOW IT WORKS**
+
 
 Outlook inbox
      │  match subject, unread only
@@ -51,13 +56,18 @@ bash
 python converter_modified.py --folder "C:/Users/You/Documents/scans"
 
 
+
 **SAMPLE DOCUMENTS**
+
 
 samples/ contains synthetic invoices generated with the help of AI. Company names, addresses, part numbers, prices, and total amounts are all fictional. This repository does not contain any real documents.
 
 The sample PDFs are designed to be image-only with no text layer to simulate a real-world document scan as you'd get from a physical scanner. This way the pipeline can be tested on real PDFs that also require OCR to be read.
 
+
+
 **INSTALLATION**
+
 
 bash
 pip install -r requirements.txt
@@ -71,7 +81,9 @@ Ghostscript	          ghostscript.com	   brew install ghostscript	     apt insta
 pywin32 is only needed for Outlook mode and is specific to Windows; the --folder mode does not need it, but currently the script is written to always import it. IF THIS SCRIPT IS RUN ON MAC, DELETE THE LINE PYWIN32.
 
 
+
 **USAGE**
+
 
 _Command	What it does_
 
@@ -82,7 +94,9 @@ python converter_modified.py	                        Keep watching the inbox, ch
 python converter_modified.py --once --include-read	  Also process messages already marked as read
 
 
+
 **CONFIGURATION**
+
 
 The settings block at the top of converter_modified.py:
 
@@ -95,7 +109,9 @@ POLL_SECONDS = 30
 SUBJECT must match the printer's email subject exactly. The Desktop folder is auto-detected, including the OneDrive-redirected version that Windows uses when the account is on OneDrive. If your scans deliver with a different subject simply alter the SUBJECT string.
 
 
+
 **FIELD EXTRACTION**
+
 
 The invoice and order numbers are extracted with two regular expressions:
 
@@ -105,7 +121,9 @@ ORDER_RE   = re.compile(r"Order\s*Number\s*[:.]?\s*(\d{5,10})",   re.I)
 Matching is done across the entire document with the whitespace collapsed, not line by line, since OCR is not reliably line-ordered. \s eats up any whitespace, [:.]? handles cases where OCR incorrectly reads a colon as a period or misses it entirely, and {5,10} prevents dates and page numbers from matching by accident. The match stops at the first non-digit, so a printed 0383810-IN becomes 0383810 without any special handling of the suffix.
 
 
+
 **LIMITATIONS**
+
 
 1. Read messages are skipped. If you open an email in Outlook before the script sees it, it will be ignored. --include-read is the opposite of this behavior. Tracking message IDs in a state file would avoid this entirely at the cost of disk usage.
 
@@ -116,7 +134,9 @@ Matching is done across the entire document with the whitespace collapsed, not l
 4. Polling, not push. The inbox is checked on a schedule rather than notified of new messages.
 
 
+
 **DEVELOPMENT NOTES**
+
 
 The original version of this script was written in 2024 to solve a document filing problem at work. This public version was rewritten in 2026 with the help of AI tools. The OCR logic in particular was made more robust to handle a wider variety of scanner outputs, several bugs were fixed, and the real scanned documents were replaced with synthetic ones to avoid sharing any employer data. 
 
