@@ -1,0 +1,11 @@
+# Core pipeline
+ocrmypdf>=16.0        # OCR; also needs Tesseract and Ghostscript installed - see README
+Tesseract
+Ghostscript
+pypdf>=4.0            # reading text back out of the OCR'd PDF
+ 
+# generate_samples.py only
+pillow>=10.0          # renders the synthetic invoice pages
+ 
+# Outlook mode only; installs on Windows, skipped elsewhere
+pywin32>=306; sys_platform == "win32"
