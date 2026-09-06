@@ -108,10 +108,13 @@ python converter_modified.py --once --include-read	  Also process messages alrea
 
 The settings block at the top of converter_modified.py:
 
-python
+
 SAMPLES_DIR = DESKTOP / "samples"            # PDFs are read from here
+
 ARCHIVE_DIR = DESKTOP / "samples modified"   # renamed copies are saved here
+
 SUBJECT = "Scanned from a Xerox Multifunction Printer"
+
 POLL_SECONDS = 30
 
 SUBJECT must match the printer's email subject exactly. The Desktop folder is auto-detected, including the OneDrive-redirected version that Windows uses when the account is on OneDrive. If your scans deliver with a different subject simply alter the SUBJECT string.
@@ -124,6 +127,7 @@ SUBJECT must match the printer's email subject exactly. The Desktop folder is au
 The invoice and order numbers are extracted with two regular expressions:
 
 INVOICE_RE = re.compile(r"Invoice\s*Number\s*[:.]?\s*(\d{5,10})", re.I)
+
 ORDER_RE   = re.compile(r"Order\s*Number\s*[:.]?\s*(\d{5,10})",   re.I)
 
 Matching is done across the entire document with the whitespace collapsed, not line by line, since OCR is not reliably line-ordered. \s eats up any whitespace, [:.]? handles cases where OCR incorrectly reads a colon as a period or misses it entirely, and {5,10} prevents dates and page numbers from matching by accident. The match stops at the first non-digit, so a printed 0383810-IN becomes 0383810 without any special handling of the suffix.
