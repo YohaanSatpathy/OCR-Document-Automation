@@ -47,7 +47,9 @@ That will read PDFs from Desktop/samples and write renamed copies to Desktop/arc
 With the included samples you should end up with exactly: 
 
 DOC_1.pdf  ->  WO0197006- INV0346424.pdf
+
 DOC_2.pdf  ->  WO0190112- INV0331011.pdf
+
 DOC_3.pdf  ->  WO0195580- INV0319271.pdf
 
 To point it somewhere else:
@@ -74,9 +76,11 @@ pip install -r requirements.txt
 
 ocrmypdf also needs two programs installed separately — it is not pure Python, and pip install alone is not enough:
 
-  Program	                Windows      	          macOS	                        Linux
-Tesseract OCR	   UB Mannheim installer	  brew install tesseract	     apt install tesseract-ocr
-Ghostscript	          ghostscript.com	   brew install ghostscript	     apt install ghostscript
+  Program	                     Windows      	              macOS	                             Linux
+  
+Tesseract OCR	         UB Mannheim installer      brew install tesseract	          apt install tesseract-ocr
+
+Ghostscript	            ghostscript.com	      brew install ghostscript	     apt install ghostscript
 
 pywin32 is only needed for Outlook mode and is specific to Windows; the --folder mode does not need it, but currently the script is written to always import it. IF THIS SCRIPT IS RUN ON MAC, DELETE THE LINE PYWIN32.
 
@@ -88,9 +92,13 @@ pywin32 is only needed for Outlook mode and is specific to Windows; the --folder
 _Command	What it does_
 
 python converter_modified.py --folder	              Process Desktop/samples, no Outlook needed
+
 python converter_modified.py --folder "<path>"	      Process any folder of PDFs
+
 python converter_modified.py --once	                One pass over the Outlook inbox, then stop
+
 python converter_modified.py	                        Keep watching the inbox, checking every 30 seconds
+
 python converter_modified.py --once --include-read	  Also process messages already marked as read
 
 
