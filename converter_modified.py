@@ -1,4 +1,3 @@
-import win32com.client
 import os
 import time
 import re
@@ -18,6 +17,7 @@ ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def download_pdf_attachments_and_process(folder_path):
+    import win32com.client
     outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
 
     inbox = outlook.GetDefaultFolder(6)
